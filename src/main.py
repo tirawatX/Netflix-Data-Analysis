@@ -2,37 +2,40 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+from data_cleaning import (
+    analyze_missing_values,
+    clean_missing_values
+)
 
 
-df = pd.read_csv("data/netflix_titles.csv")
 
-# Missing Values Analysis
+def main():
 
-print("\n========== MISSING VALUES ==========")
+    # Load Raw Dataset
+    df = pd.read_csv("data/netflix_titles.csv")
 
-missing = df.isnull().sum()
+    print("\n========== BEFORE CLEANING ==========")
+    print(df.isnull().sum())
 
-print(missing)
+    # Clean Dataset
+    df_clean = clean_missing_values(df)
 
-# Calculate Missing Percentage
-missing_percent = (df.isnull().sum() / len(df)) * 100
+    print("\n========== AFTER CLEANING ==========")
+    print(df_clean.isnull().sum())
 
-print("\n========== MISSING PERCENTAGE ==========")
+    # Verify Original Data
+    print("\n========== ORIGINAL DATA CHECK ==========")
+    print("Original director missing:",
+          df["director"].isnull().sum())
 
-print(missing_percent.sort_values(ascending=False).round(2))
+    # Verify Cleaned Data
+    print("\n========== CLEANED DATA CHECK ==========")
+    print("Cleaned director missing:",
+          df_clean["director"].isnull().sum())
 
-print("\n========== DUPLICATE DATA ==========")
+    print("\nOriginal Shape:", df.shape)
+    print("Cleaned Shape:", df_clean.shape)
 
-print("Duplicate Rows:", df.duplicated().sum())
 
-print("\n========== CONTENT TYPES ==========")
-
-print(df["type"].value_counts())
-
-print("\n========== RATINGS ==========")
-
-print(df["rating"].value_counts())
-
-print("\n========== RELEASE YEARS ==========")
-
-print(df["release_year"].value_counts().head(10))
+if __name__ == "__main__":
+    main()

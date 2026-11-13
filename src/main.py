@@ -4,7 +4,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from data_cleaning import (
     analyze_missing_values,
-    clean_missing_values
+    clean_missing_values,
+    analyze_duplicates,
+    remove_duplicates
 )
 
 
@@ -35,6 +37,19 @@ def main():
 
     print("\nOriginal Shape:", df.shape)
     print("Cleaned Shape:", df_clean.shape)
+
+    print("\n========== DUPLICATE ANALYSIS ==========")
+
+    duplicate_count = analyze_duplicates(df)
+
+    print("\nTotal Duplicate Rows:", duplicate_count)
+
+    print("\n========== REMOVE DUPLICATES ==========")
+
+    df_no_duplicates = remove_duplicates(df)
+
+    print("\nOriginal Shape:", df.shape)
+    print("Cleaned Shape:", df_no_duplicates.shape)
 
 
 if __name__ == "__main__":

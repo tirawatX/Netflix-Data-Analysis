@@ -6,7 +6,10 @@ from data_cleaning import (
     analyze_missing_values,
     clean_missing_values,
     analyze_duplicates,
-    remove_duplicates
+    remove_duplicates,
+    inspect_date_column,
+    convert_date_column,
+    extract_date_features
 )
 
 
@@ -51,6 +54,33 @@ def main():
     print("\nOriginal Shape:", df.shape)
     print("Cleaned Shape:", df_no_duplicates.shape)
 
+    inspect_date_column(df)
+    print("\n========== DATE CONVERSION ==========")
+
+    df_date = convert_date_column(df)
+
+    print("\nBefore Conversion:")
+    print(df["date_added"].dtype)
+
+    print("\nAfter Conversion:")
+    print(df_date["date_added"].dtype)
+
+    print("\nConverted Sample:")
+    print(df_date["date_added"].head(10))
+
+    print("\nMissing Dates:")
+    print(df_date["date_added"].isnull().sum())
+
+
+
+    df_features = extract_date_features(df_date)
+
+    print(df_features[
+        ["date_added", "year_added", "month_added", "day_added"]
+    ].head(10))
+
+    print("\nNew Columns:")
+    print(df_features.columns.tolist())
 
 if __name__ == "__main__":
     main()

@@ -72,3 +72,47 @@ def remove_duplicates(df):
     print("Duplicates After:", duplicates_after)
 
     return df_clean
+
+
+def inspect_date_column(df):
+
+    print("\n========== DATE COLUMN INSPECTION ==========")
+
+    print("Data Type:")
+    print(df["date_added"].dtype)
+
+    print("\nSample Data:")
+    print(df["date_added"].head(10))
+
+    print("\nMissing Values:")
+    print(df["date_added"].isnull().sum())
+
+def convert_date_column(df):
+
+    # Create a copy
+    df_clean = df.copy()
+
+    # Convert string to datetime
+    df_clean["date_added"] = pd.to_datetime(
+        df_clean["date_added"].str.strip(),
+        format="%B %d, %Y",
+        errors="coerce"
+    )
+
+    return df_clean
+
+def extract_date_features(df):
+
+    # Create a copy
+    df_clean = df.copy()
+
+    # Extract year
+    df_clean["year_added"] = df_clean["date_added"].dt.year
+
+    # Extract month
+    df_clean["month_added"] = df_clean["date_added"].dt.month
+
+    # Extract day
+    df_clean["day_added"] = df_clean["date_added"].dt.day
+
+    return df_clean

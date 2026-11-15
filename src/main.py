@@ -9,7 +9,9 @@ from data_cleaning import (
     remove_duplicates,
     inspect_date_column,
     convert_date_column,
-    extract_date_features
+    extract_date_features,
+    inspect_duration,
+    extract_duration_features
 )
 
 
@@ -81,6 +83,25 @@ def main():
 
     print("\nNew Columns:")
     print(df_features.columns.tolist())
+
+    inspect_duration(df)
+
+
+    print("\n========== DURATION FEATURE ENGINEERING ==========")
+
+    df_duration = extract_duration_features(df)
+
+    print(
+        df_duration[
+            ["type", "duration", "duration_int", "duration_unit"]
+        ].head(15)
+    )
+
+    print("\nDuration Units After Cleaning:")
+    print(df_duration["duration_unit"].value_counts())
+
+    print("\nMissing Duration:")
+    print(df_duration["duration_int"].isnull().sum())
 
 if __name__ == "__main__":
     main()

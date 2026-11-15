@@ -116,3 +116,48 @@ def extract_date_features(df):
     df_clean["day_added"] = df_clean["date_added"].dt.day
 
     return df_clean
+
+def inspect_duration(df):
+
+    print("\n========== DURATION INSPECTION ==========")
+
+    print("\nData Type:")
+    print(df["duration"].dtype)
+
+    print("\nSample Data:")
+    print(df[["type", "duration"]].head(10))
+
+    print("\nMissing Values:")
+    print(df["duration"].isnull().sum())
+
+    print("\nDuration Units:")
+    print(df["duration"].str.extract(r"([A-Za-z]+)$")[0].value_counts())
+
+
+def extract_duration_features(df):
+
+    # Create a copy
+    df_clean = df.copy()
+
+    # Extract numeric duration
+    df_clean["duration_int"] = (
+        df_clean["duration"]
+        .str.extract(r"(\d+)")
+        .astype("Int64")
+    )
+
+    # Extract duration unit
+    df_clean["duration_unit"] = (
+        df_clean["duration"]
+        .str.extract(r"([A-Za-z]+)$")[0]
+    )
+
+    # Standardize duration units
+    df_clean["duration_unit"] = (
+        df_clean["duration_unit"]
+        .replace({
+            "Season": "Seasons"
+        })
+    )
+
+    return df_clean

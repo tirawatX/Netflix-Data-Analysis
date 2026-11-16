@@ -161,3 +161,20 @@ def extract_duration_features(df):
     )
 
     return df_clean
+
+
+def save_cleaned_data(df, output_path):
+
+    import os
+
+    # Create folder if it does not exist
+    os.makedirs(
+        os.path.dirname(output_path),
+        exist_ok=True
+    )
+
+    # Save DataFrame to CSV
+    df.to_csv(output_path, index=False)
+
+    print("\nDataset saved successfully!")
+    print("Output:", output_path)

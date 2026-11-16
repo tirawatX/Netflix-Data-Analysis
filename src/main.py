@@ -11,7 +11,8 @@ from data_cleaning import (
     convert_date_column,
     extract_date_features,
     inspect_duration,
-    extract_duration_features
+    extract_duration_features,
+    save_cleaned_data
 )
 
 
@@ -102,6 +103,22 @@ def main():
 
     print("\nMissing Duration:")
     print(df_duration["duration_int"].isnull().sum())
+
+
+    df_clean = clean_missing_values(df)
+
+    df_clean = remove_duplicates(df_clean)
+
+    df_clean = convert_date_column(df_clean)
+
+    df_clean = extract_date_features(df_clean)
+
+    df_clean = extract_duration_features(df_clean)
+
+    save_cleaned_data(
+        df_clean,
+        "data/processed/netflix_cleaned.csv"
+    )
 
 if __name__ == "__main__":
     main()

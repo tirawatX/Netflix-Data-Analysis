@@ -19,7 +19,9 @@ from data_analysis import (
     analyze_content_added_by_year
 )
 from data_visualization import (
-    plot_content_added_by_year
+    plot_content_added_by_year,
+    plot_content_type,
+    plot_movie_duration_distribution
 )
 
 
@@ -33,6 +35,11 @@ def main():
     analyze_content_added_by_year(df)
 
     plot_content_added_by_year(df)
+
+    plot_content_type(df)
+
+    plot_movie_duration_distribution(df)
+
 
 if __name__ == "__main__":
     main()

@@ -16,7 +16,9 @@ from data_cleaning import (
 )
 from data_analysis import (
     analyze_release_year,
-    analyze_content_added_by_year
+    analyze_content_added_by_year,
+    analyze_movie_duration_stats,
+    analyze_movie_outliers
 )
 from data_visualization import (
     plot_content_added_by_year,
@@ -27,18 +29,11 @@ from data_visualization import (
 
 
 def main():
-
     df = pd.read_csv("data/processed/netflix_cleaned.csv")
 
-    analyze_release_year(df)
+    analyze_movie_duration_stats(df)
 
-    analyze_content_added_by_year(df)
-
-    plot_content_added_by_year(df)
-
-    plot_content_type(df)
-
-    plot_movie_duration_distribution(df)
+    analyze_movie_outliers(df)
 
 
 if __name__ == "__main__":

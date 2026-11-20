@@ -80,3 +80,24 @@ def plot_movie_duration_distribution(df):
 
     plt.tight_layout()
     plt.show()
+
+
+def plot_movie_duration_boxplot(df):
+
+    movie_duration = df.loc[
+        df["type"] == "Movie",
+        "duration_int"
+    ].dropna()
+
+    plt.figure(figsize=(10, 5))
+
+    plt.boxplot(movie_duration)
+
+    plt.title("Netflix Movie Duration Box Plot")
+    plt.ylabel("Duration (Minutes)")
+    plt.xticks([1], ["Movies"])
+
+    plt.grid(axis="y", alpha=0.3)
+
+    plt.tight_layout()
+    plt.show()

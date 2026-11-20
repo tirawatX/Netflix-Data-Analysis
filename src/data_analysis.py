@@ -96,3 +96,22 @@ def analyze_movie_outliers(df):
     print(outliers.sort_values(ascending=False).head(10))
 
     return outliers
+
+
+def analyze_genres(df):
+
+    print("\n========== GENRE ANALYSIS ==========")
+
+    # Split genres
+    genres = df["listed_in"].str.split(", ")
+
+    # Expand genres into separate rows
+    all_genres = genres.explode()
+
+    # Count each genre
+    genre_counts = all_genres.value_counts()
+
+    print("\nTop 10 Genres:")
+    print(genre_counts.head(10))
+
+    return genre_counts

@@ -19,13 +19,15 @@ from data_analysis import (
     analyze_content_added_by_year,
     analyze_movie_duration_stats,
     analyze_movie_outliers,
-    analyze_genres
+    analyze_genres,
+    analyze_countries
 )
 from data_visualization import (
     plot_content_added_by_year,
     plot_content_type,
     plot_movie_duration_distribution,
-    plot_movie_duration_boxplot
+    plot_movie_duration_boxplot,
+    plot_top_genres
 )
 
 
@@ -33,13 +35,9 @@ from data_visualization import (
 def main():
     df = pd.read_csv("data/processed/netflix_cleaned.csv")
 
-    analyze_movie_duration_stats(df)
+    plot_top_genres(df)
 
-    analyze_movie_outliers(df)
-
-    plot_movie_duration_boxplot(df)
-
-    analyze_genres(df)
+    analyze_countries(df)
 
 
 if __name__ == "__main__":

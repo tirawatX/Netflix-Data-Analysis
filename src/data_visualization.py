@@ -101,3 +101,33 @@ def plot_movie_duration_boxplot(df):
 
     plt.tight_layout()
     plt.show()
+
+
+def plot_top_genres(df):
+
+    # Split genres
+    genres = df["listed_in"].str.split(", ")
+
+    # Expand genres
+    all_genres = genres.explode()
+
+    # Count genres
+    genre_counts = all_genres.value_counts().head(10)
+
+    # Reverse order for horizontal chart
+    genre_counts = genre_counts.sort_values()
+
+    # Create chart
+    plt.figure(figsize=(10, 6))
+
+    plt.barh(
+        genre_counts.index,
+        genre_counts.values
+    )
+
+    plt.title("Top 10 Netflix Genres")
+    plt.xlabel("Number of Content")
+    plt.ylabel("Genre")
+
+    plt.tight_layout()
+    plt.show()

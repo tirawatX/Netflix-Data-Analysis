@@ -115,3 +115,28 @@ def analyze_genres(df):
     print(genre_counts.head(10))
 
     return genre_counts
+
+
+def analyze_countries(df):
+
+    print("\n========== COUNTRY ANALYSIS ==========")
+
+    # Replace Unknown with missing values
+    countries = df["country"].replace("Unknown", pd.NA)
+
+    # Split countries
+    countries = countries.str.split(", ")
+
+    # Expand countries into separate rows
+    all_countries = countries.explode()
+
+    # Remove missing values
+    all_countries = all_countries.dropna()
+
+    # Count countries
+    country_counts = all_countries.value_counts()
+
+    print("\nTop 10 Countries:")
+    print(country_counts.head(10))
+
+    return country_counts

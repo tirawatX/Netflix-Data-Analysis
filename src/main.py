@@ -27,7 +27,8 @@ from data_visualization import (
     plot_content_type,
     plot_movie_duration_distribution,
     plot_movie_duration_boxplot,
-    plot_top_genres
+    plot_top_genres,
+    plot_top_countries
 )
 
 
@@ -35,9 +36,10 @@ from data_visualization import (
 def main():
     df = pd.read_csv("data/processed/netflix_cleaned.csv")
 
-    plot_top_genres(df)
 
     analyze_countries(df)
+
+    plot_top_countries(df)
 
 
 if __name__ == "__main__":

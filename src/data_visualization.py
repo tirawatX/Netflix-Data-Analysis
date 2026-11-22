@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+import pandas as pd
 
 def plot_content_added_by_year(df):
 
@@ -128,6 +128,45 @@ def plot_top_genres(df):
     plt.title("Top 10 Netflix Genres")
     plt.xlabel("Number of Content")
     plt.ylabel("Genre")
+
+    plt.tight_layout()
+    plt.show()
+
+
+
+
+
+def plot_top_countries(df):
+
+    # Replace Unknown with missing values
+    countries = df["country"].replace("Unknown", pd.NA)
+
+    # Split countries
+    countries = countries.str.split(", ")
+
+    # Expand countries into separate rows
+    all_countries = countries.explode()
+
+    # Remove missing values
+    all_countries = all_countries.dropna()
+
+    # Count countries
+    country_counts = all_countries.value_counts().head(10)
+
+    # Sort for horizontal chart
+    country_counts = country_counts.sort_values()
+
+    # Create chart
+    plt.figure(figsize=(10, 6))
+
+    plt.barh(
+        country_counts.index,
+        country_counts.values
+    )
+
+    plt.title("Top 10 Netflix Content Producing Countries")
+    plt.xlabel("Number of Content")
+    plt.ylabel("Country")
 
     plt.tight_layout()
     plt.show()

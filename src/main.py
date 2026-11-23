@@ -31,15 +31,27 @@ from data_visualization import (
     plot_top_countries
 )
 
+from data_loader import load_raw_data
 
 
 def main():
-    df = pd.read_csv("data/processed/netflix_cleaned.csv")
+
+    # Load dataset
+    df = load_raw_data()
+
+    # Display dataset information
+    print("========== DATA LOADING ==========")
+
+    print("Dataset loaded successfully!")
+    print("Shape:", df.shape)
+
+    print("\nFirst 5 Rows:")
+    print(df.head())
 
 
-    analyze_countries(df)
+if __name__ == "__main__":
+    main()
 
-    plot_top_countries(df)
 
 
 if __name__ == "__main__":

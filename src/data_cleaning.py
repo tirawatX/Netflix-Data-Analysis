@@ -1,5 +1,5 @@
 import pandas as pd
-
+from pathlib import Path
 
 def analyze_missing_values(df):
 
@@ -163,13 +163,15 @@ def extract_duration_features(df):
     return df_clean
 
 
+
 def save_cleaned_data(df, output_path):
 
-    import os
+    # Convert output path to Path object
+    output_path = Path(output_path)
 
-    # Create folder if it does not exist
-    os.makedirs(
-        os.path.dirname(output_path),
+    # Create parent folder if it does not exist
+    output_path.parent.mkdir(
+        parents=True,
         exist_ok=True
     )
 

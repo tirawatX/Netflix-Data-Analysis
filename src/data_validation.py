@@ -33,6 +33,19 @@ def validate_dataset(df):
         if column not in df.columns
     ]
 
+
+    # 2.1 Check Missing Values by Column
+    print("\nMissing Values by Column:")
+
+    missing_by_column = df.isnull().sum()
+
+    print(
+        missing_by_column[
+            missing_by_column > 0
+        ]
+    )
+
+
     print("\nMissing Required Columns:")
     print(missing_columns)
 

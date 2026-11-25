@@ -180,3 +180,25 @@ def save_cleaned_data(df, output_path):
 
     print("\nDataset saved successfully!")
     print("Output:", output_path)
+
+
+
+def clean_missing_values(df):
+
+    # Create a copy to protect original data
+    df_clean = df.copy()
+
+    # Fill missing values in text columns
+    columns_to_fill = [
+        "director",
+        "cast",
+        "country",
+        "rating"
+    ]
+
+    for column in columns_to_fill:
+        df_clean[column] = df_clean[column].fillna("Unknown")
+
+    return df_clean
+
+

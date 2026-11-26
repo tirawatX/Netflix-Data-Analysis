@@ -82,6 +82,8 @@ def main():
     # Step 7: Save Processed Data
     print("\n[7] Saving Processed Data...")
 
+
+    validate_dataset(df_clean)
     save_cleaned_data(df_clean, OUTPUT_PATH)
 
     # Final Summary
@@ -92,7 +94,7 @@ def main():
 
     print("\nPipeline completed successfully!")
 
-    validate_dataset(df_clean)
+    
 
 if __name__ == "__main__":
     main()
